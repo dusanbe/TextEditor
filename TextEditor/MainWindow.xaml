@@ -5,8 +5,91 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TextEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-		<Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="44" Margin="112,88,0,0" VerticalAlignment="Top" Width="176"/>
-	</Grid>
+        Title="TESC"
+		Height="500"
+		Width="1000"
+		WindowStartupLocation="CenterScreen">
+	<Window.CommandBindings>
+		<CommandBinding Command="ApplicationCommands.Open"
+						Executed="OpenCmdExecuted"
+						CanExecute="OpenCmdCanExecute"/>
+		<CommandBinding Command="ApplicationCommands.Save"
+						Executed="SaveCmdExecuted"
+						CanExecute="SaveCmdCanExecute"/>
+	</Window.CommandBindings>
+	<DockPanel>
+		<Menu	DockPanel.Dock ="Top"
+				HorizontalAlignment="Left"
+				Background="White"
+				BorderBrush ="Black">
+			<MenuItem	Header="_File">
+				<MenuItem Command ="ApplicationCommands.Open"/>
+				<MenuItem Command ="ApplicationCommands.Save"/>
+				<Separator/>
+				<MenuItem	Header ="_Exit"
+							MouseEnter ="MouseEnterExitArea"
+							MouseLeave ="MouseLeaveArea"
+							Click ="FileExit_Click"/>
+			</MenuItem>
+			<MenuItem Header="_Edit">
+				<MenuItem Command ="ApplicationCommands.Copy"/>
+				<MenuItem Command ="ApplicationCommands.Cut"/>
+				<MenuItem Command ="ApplicationCommands.Paste"/>
+			</MenuItem>
+			<MenuItem Header="_Tools">
+				<MenuItem	Header ="_Spelling Hints"
+							MouseEnter ="MouseEnterToolsHintsArea"
+							MouseLeave ="MouseLeaveArea"
+							Click ="ToolsSpellingHints_Click"/>
+			</MenuItem>
+		</Menu>
+		<StatusBar DockPanel.Dock ="Bottom"
+				   Background="BurlyWood">
+			<StatusBarItem>
+				<TextBlock Name="statBarText"
+						   Text="Ready"/>
+			</StatusBarItem>
+		</StatusBar>
+		<Grid DockPanel.Dock="Left"
+			  Background="BlanchedAlmond">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="3*"/>
+			</Grid.ColumnDefinitions>
+			<GridSplitter	Grid.Column="0"
+							Width="5"
+							Background="Salmon"/>
+			<DockPanel Grid.Column="0">
+				<StackPanel	DockPanel.Dock="Top"
+						VerticalAlignment ="Stretch" >
+					<Label	Name="lblSpellingInstructions"
+						FontSize="14"
+						Margin="10,10,0,0">
+						Spelling Hints
+					</Label>
+					<Expander	Name="expanderSpelling"
+							Header ="Try these!"
+							Margin="10,10,10,10">
+						<Label	Name ="lblSpellingHints"
+							FontSize ="12"/>
+					</Expander>
+				</StackPanel>
+				<Button DockPanel.Dock="Bottom"
+						VerticalAlignment="Bottom"
+						Height="30"
+						Background="Salmon"
+						BorderBrush="AliceBlue"
+						Content="Check Spelling"
+						Click="ToolsSpellingHints_Click"/>
+			</DockPanel>
+			<TextBox	Grid.Column ="1"
+						AcceptsReturn ="True"
+						Name ="txtData"
+						FontSize ="14"
+						BorderBrush ="White"
+						VerticalScrollBarVisibility="Auto"
+						HorizontalScrollBarVisibility="Auto"
+						SpellCheck.IsEnabled="True"/>
+		</Grid>
+	</DockPanel>
 </Window>
