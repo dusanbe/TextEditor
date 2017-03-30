@@ -26,7 +26,7 @@ namespace TextEditor
 		public MainWindow()
 		{
 			InitializeComponent();
-			SetF1CommandBinding();
+            SetF1CommandBinding();
 		}
 
 		private void FileExit_Click(object sender, RoutedEventArgs e)
