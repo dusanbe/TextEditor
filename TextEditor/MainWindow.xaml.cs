@@ -64,6 +64,10 @@ namespace TextEditor
 				lblSpellingHints.Content = spellingHints;
 				expanderSpelling.IsExpanded = true;
 			}
+            else
+            {
+                MessageBox.Show("No spelling suggestions found.");
+            }
 		}
 
 		private void SetF1CommandBinding()
